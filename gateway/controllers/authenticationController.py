@@ -73,3 +73,13 @@ async def deleteUser(ID: int, Token: str = Header(...)):
         )
 
     return response.json()
+
+@router.get("/searchuser/{KEY}")
+async def searchUser(KEY: str, Token: str = Header(...)):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+          SPRING_URL +  f"user/searchuser/{KEY}",
+            headers={"Token": Token}
+        )
+
+    return response.json()    
